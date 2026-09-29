@@ -1,0 +1,13 @@
+#show database;
+#create database if not exists students;
+use students;
+show tables;
+#std rollno
+# subject
+# mark
+create table std_details(
+  std_rollno int,
+  std_name varchar(20),
+  subject varchar(10),
+  mark float
+);
