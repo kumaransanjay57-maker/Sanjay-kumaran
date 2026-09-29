@@ -1,0 +1,66 @@
+
+select * from std_details;
+show databases;
+create database students;
+
+
+use students;
+show tables;
+
+desc std_details;
+select * from std_details;
+
+#insert datas in table
+insert into std_details (std_rollno,std_name,subject,mark)
+values (101,'ravi','maths',82.5);
+
+create table std_details(
+std_rollno int,
+std_name varchar(20),
+subject varchar(15),
+mark float
+);
+
+insert into #method 2: Insert datas in table
+insert into std_details values (102,'Rani','Tamil',87);
+#Error
+insert into std_details values (103,'Vinoth',87);
+#3 coloumns with colname mentioned
+insert into std_details (std_rollno,std_name,mark)
+values (103,'Vinoth',87);
+
+#Inserting more than 1 value at a time
+insert into std_details values (104,'Kabir','English',63.8),
+(105,'Manoj','Science',65),(106,'Devi','Tamil',77.5);
+
+# Method 1:Renameing a table
+alter table  std_details rename to student;
+
+# Method 2:Rename using alter table
+alter table student rename to  std_details;
+
+select * from std_details;
+
+desc student_details;
+
+#change column name
+alter table std_details rename column std_rollno to RollNo;
+
+#change the  data type of column
+alter table std_details change column
+mark stdMark int;
+
+desc std_details;
+
+#Adding a new column
+alter table std_details add column regNo int;
+
+select * from std_details;
+
+#Delete a colu#mn
+alter table std_details drop column rollNo;
+
+desc std_details;
+
+
+
