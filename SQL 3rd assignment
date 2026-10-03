@@ -1,0 +1,108 @@
+use student;
+show tables;
+desc student_detail;
+
+#not null constrin
+create table emp(
+empid int not null,
+empname varchar(20),
+empdep varchar(20)
+);
+
+# it used to remove null values
+alter table emp  modify  column empid int null;
+
+desc emp;
+
+#empid as null to recived error 
+insert into emp (empid,empname)value('vinith','HR');
+
+#with value in empid
+insert into emp(empid,empname,empdep)value(200,'vinith','DA');
+SELECT *FROM emp;
+
+#unique condtraint
+create table empdetail(
+empid int unique,
+empname varchar(15)not null,
+empsal float not null
+);
+
+desc empdetail;
+
+#which duplicate empid _to cheak if uniqe constraint work properly or not 
+insert into empdetail value (1,'hari','50000'),
+(1,'mani','20000');
+
+insert into empdetail value (1,'hari','50000'),(2,'mani','25000');
+SELECT *FROM emp;
+
+#primary key 
+create table shopping(
+prod_name varchar(20),
+prod_price decimal(4,2),
+order_id int primary key
+);
+
+desc shopping;
+ 
+ #check which null value 
+ insert into shopping (prod_name,prod_price)value('power',20.50);
+ 
+ #check with duplicate values
+ insert into shopping (order_id,prod_name,prod_price)values(100,'toys',50.60),
+(100,'max',30.70);
+
+ insert into shopping (order_id,prod_name,prod_price)values(100,'toys',50.60),
+(120,'max',30.70);
+select *from shopping;
+
+#check constraint
+create table votes(
+name varchar(25),
+age int check (age>=18)
+);
+
+#insert age below 18
+insert into votes values('sam',17);
+
+#insert age equal to 18
+insert into votes values('sri',18);
+
+#insert age above 18
+insert into votes values('sai',20);
+
+select *from votes;
+
+#default constreint
+create table itemdetails(
+item_name varchar(15),
+qty int,
+price float default 10
+);
+
+desc itemdetails;
+
+insert into itemdetails(item_name,qty)values('aruna',2);
+insert into itemdetails(item_name,qty)values('jim',20.58);
+select*from itemdetails;
+
+#add constraints with name 
+create table departements(
+dep_id int,
+dep_name varchar(15),
+no_of_emp int ,
+constraint pr_key primary key (dep_id),
+constraint up_key unique (dep_name)
+);
+
+desc departements;
+alter table departements drop constraint up_key;
+
+#auto increment 
+create table edetail(
+empid int auto_increment primary key,
+empname varchar(20)
+);
+ 
+ insert into edetail (empname)values('joi'),('bim');
