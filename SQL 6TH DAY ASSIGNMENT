@@ -1,0 +1,76 @@
+# data function in mysql
+
+select current_date() as today_date;
+select curdate() as today_dt;
+
+# to print data and time
+select now() as dt_time;
+
+# to print only year from date
+select year('2025-10-10') as yr;
+
+select year(curdate()) as cur_yr;
+
+select month(curdate()) as cur_mnt;
+
+# to print year, month and date seperately
+select day(curdate()) as dd,month(curdate()) as mm
+,year(curdate()) as yyy;
+
+select dayname(curdate()) as tdname;
+
+select dayofweek(now()) as weekno;
+
+select datediff('2026-10-10',curdate()) as difference;
+
+select timestampdiff(month,'2026-08-01','2026-12-01') as mn_diff;
+
+select timestampdiff(day,'2026-10-01','2026-01-01') as day_diff;
+
+select timestampdiff(year,'2024-01-01','2026-01-01') as yr_diff;
+
+# replace
+select replace('good morning','morning','afternoon') as replaced;
+
+
+# concat
+
+select concat('hello','world') as final_str;
+
+select concat_ws('hello','world') as with_sep;
+
+# sub string
+select substr('good evening',6,7) as sb_str;
+
+# upper case 
+select upper('hello') as upper_str;
+select ucase('evening') as upper_str;
+
+select lower('how are you') as low_str;
+select lcase('how are you') as low_str;
+
+# lpad
+select lpad('hi',5,'#') as left_pad;
+
+# rpad
+select rpad('hello',7,'*') as rigth_pad;
+
+select lpad(rpad('hi',4,'*'),6,'*') as result;
+
+#trim
+select trim('welcome') as trimmed;
+
+# trim and concat
+select concat('hi',trim('welcome'),'home') as full_txt;
+
+select concat('hi',rtrim('welcome'),'home') as itrimmed;
+
+select concat('hi',trim('welcome'),'home') as rtrimmed;
+
+select concat('hi',trim('welcome'),'home') as full_txt, concat('hi',rtrim('welcome'),'home') as itrimmed, concat('hi',trim('welcome'),'home') as rtrimmed;
+
+select substring(concat('hi',trim('welcome'),upper('home')),10,4) as above_str;
+
+select concat('hi',trim('welcome'),'home');
+select right('hiwelcomehome',4);
+select upper('home');
