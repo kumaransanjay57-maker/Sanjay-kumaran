@@ -1,0 +1,55 @@
+show databases;
+use students;
+desc emp;
+show tables;
+
+select * from empdetails;
+
+# single row subquery
+select avg(empsal) from empdetails;
+
+select empname,empsal from empdetails where
+empsal > (select avg(empsal) from empdetails);
+
+# multi row subquery
+select distinct empdep from empdetails where empsal > 20000;
+
+select empid,empdep,empsal from empdetails
+where empdep in 
+(select empdep from empdetails where empsal > 20000);
+show tables;
+
+select * from std_details;
+select distinct subject from std_details where stdmark > 60;
+
+select std_name,subject from std_details
+where subject in
+(select distinct subject from std_details where stdmark > 60);
+
+# correlated subquery
+select r1.std_name,r1.subject,r1.stdmark
+from std_details r1
+where r1.stdmark <
+(select max(r2.stdmark) from std_details r2 
+where r1.subject = r2.subject);
+select * from std_details;
+
+
+create table customer(
+ customer_id int auto_increment primary key,
+ customer_name varchar(20) not null,
+ email varchar(50)
+);
+
+create table orders(
+ order_id int auto_increment primary key,
+ order_dt date not null,
+ amount decimal(5,2) not null,
+ cust_id int,
+ foreign key (cust_id) references customers(cust_id)
+);
+
+insert into customer (customer_name,email) values
+('raj','rajkumar@mail.com'),('mohan','mohansiva@mail.com'),('anbu','anbumani@mail.com');
+
+select * from customer;
