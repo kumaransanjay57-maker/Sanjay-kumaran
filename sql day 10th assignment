@@ -1,0 +1,76 @@
+show databases;
+use students;
+desc emp;
+show tables;
+
+select * from std_details;
+
+delimiter //
+create procedure student_mark()
+begin
+ select std_name,subject,stdmark
+ from std_details;
+end //
+delimiter ;
+
+call student_mark(); 
+
+delimiter //
+create procedure stud_mark(in sname varchar(15))
+begin
+ select std_name,subject,stdmark
+ from std_details where std_name=sname;
+end //
+delimiter ;
+
+call stud_mark('manoj');
+
+delimiter $$
+create procedure std_avg(out avgmark int)
+begin
+  select avg(stdmark) into avgmark 
+  from std_details;
+  end $$
+  delimiter ;
+  
+  call std_avg(@stdaverage);
+  select @stdaverage as avgmark;
+  
+  delimiter //
+  create procedure empdetais(in id int,out ename varchar(15),
+  out esal float)
+  begin
+    select empname into ename from empdetails where empid=id;
+	select empsal into esal from empdetails where empid=id;
+end //
+delimiter ;
+
+call empdetais(1,@empname,@empsal);
+select @empname as ename, @empsal as esal;     
+
+select * from empdetails;
+
+# discount price calculation
+
+delimiter //
+create procedure discprice(inout price float)
+begin
+  set price = price - 20;
+end //
+delimiter ;
+
+set @prc = 100; 
+call discprice(@prc);
+select @prc as discount;  
+
+delimiter $$
+create procedure count_val(in inc int,inout counter int)
+begin
+  set counter = counter + inc;
+end $$
+delimiter ;
+
+set @cou = 1;
+call count_val(3,@cou);
+select @cou as counted;
+
